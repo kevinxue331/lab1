@@ -13,8 +13,9 @@ int main(int argc, char *argv[])
 		return EINVAL;
 	}
 	int fd[2];
+	int error;
 	for(int index=1;index<argc-1;index++){
-		int error=pipe(fd);
+		error=pipe(fd);
 		if(error==-1){
 			perror("Pipe failed /n");
 			return EINVAL;
@@ -55,7 +56,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
-	error = err = execlp(argv[argc-1], argv[argc-1], (char*)0);
+	error = execlp(argv[argc-1], argv[argc-1], (char*)0);
 	if(error==-1){
 		perror("Execlp failed /n");
 		return EINVAL;
