@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 	// TODO: it's all yours
 	if (argv[1]==NULL){
-		perror("Requires more than 0 arguments /n");
+		perror("Requires more than 0 arguments");
 		return EINVAL;
 	}
 	int fd[2];
@@ -17,25 +17,25 @@ int main(int argc, char *argv[])
 	for(int index=1;index<argc-1;index++){
 		error=pipe(fd);
 		if(error==-1){
-			perror("Pipe failed /n");
+			perror("Pipe failed");
 			return EINVAL;
 		}
 		pid_t p = fork(); 
     	if(p<0){ 
-     	 	perror("Fork failed /n"); 
+     	 	perror("Fork failed "); 
       		return EINVAL;
     	} 
 		if(p==0){
 			close(fd[0]);
 			error = dup2(fd[1],1);
 			if(error==-1){
-				perror("Dup2 failed /n");
+				perror("Dup2 failed");
 				return EINVAL;
 			}
 			close(fd[1]);
 			error = execlp(argv[index], argv[index], (char*)0);
 			if(error==-1){
-				perror("Execlp failed /n");
+				perror("Execlp failed");
 				return ECHILD;
 			}
 			
@@ -45,20 +45,20 @@ int main(int argc, char *argv[])
 			close(fd[1]);
 			error = dup2(fd[0],0);
 			if(error==-1){
-				perror("Dup2 failed /n");
+				perror("Dup2 failed");
 				return EINVAL;
 			}
 			close(fd[0]);
 			error = wait(NULL);
 			if(error==-1){
-				perror("Wait failed /n");
+				perror("Wait failed");
 				return EINVAL;
 			}
 		}
 	}
 	error = execlp(argv[argc-1], argv[argc-1], (char*)0);
 	if(error==-1){
-		perror("Execlp failed /n");
+		perror("Execlp failed");
 		return EINVAL;
 	}
 	//execlp(argv[1], argv[1], NULL);
