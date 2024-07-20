@@ -54,11 +54,7 @@ int main(int argc, char *argv[])
 				return EINVAL;
 			}
 			close(fd[0]);
-			error = wait(NULL);
-			if(error==-1){
-				perror("Wait failed");
-				return EINVAL;
-			}
+			
 		}
 	}
 	error = execlp(argv[argc-1], argv[argc-1], (char*)0);
