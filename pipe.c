@@ -41,7 +41,12 @@ int main(int argc, char *argv[])
 			
 		}
 		if(p>0){
+			int child_status;
+			waitpid(p,&child_status,0);
 			
+      if (WEXITSTATUS(status)) {
+        exit(WEXITSTATUS(status));
+      }
 			close(fd[1]);
 			error = dup2(fd[0],0);
 			if(error==-1){
