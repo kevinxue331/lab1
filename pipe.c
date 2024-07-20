@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 			waitpid(p,&child_status,0);
 			
       		if (WEXITSTATUS(child_status)) {
-        		retrun WEXITSTATUS(child_status);
+        		return WEXITSTATUS(child_status);
       		}
 			close(fd[1]);
 			error = dup2(fd[0],0);
