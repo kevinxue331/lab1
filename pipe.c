@@ -32,17 +32,17 @@ int main(int argc, char *argv[])
 				return EINVAL;
 			}
 			close(fd[1]);
-			error = execlp(argv[index], argv[index], NULL);
+			error = execlp(argv[index], argv[index], (char*)0);
 			if(error==-1){
 				perror("Execlp failed /n");
-				return EINVAL;
+				return ECHILD;
 			}
 			
 		}
 		if(p>0){
 			
 			close(fd[1]);
-			error = dup2(fd[1],1);
+			error = dup2(fd[0],0);
 			if(error==-1){
 				perror("Dup2 failed /n");
 				return EINVAL;
@@ -55,6 +55,12 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+	error = err = execlp(argv[argc-1], argv[argc-1], (char*)0);
+	if(error==-1){
+		perror("Execlp failed /n");
+		return EINVAL;
+	}
 	//execlp(argv[1], argv[1], NULL);
 	return 0;
 }
+
