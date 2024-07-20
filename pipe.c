@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		return EINVAL;
 	}
 	int fd[2];
-	for(int index=1;i<argc-1;index++){
+	for(int index=1;index<argc-1;index++){
 		int error=pipe(fd);
 		if(error==-1){
 			perror("Pipe failed /n");
