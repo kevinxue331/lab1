@@ -2,16 +2,29 @@
 
 ## Pipe Up
 
-One sentence description
+Implementation of basic command pipes in Linux using C
 
 ## Building
 
-Explain briefly how to build your program
+To build 
+``` sh
+make
+```
 
 ## Running
 
-Show an example run of your program, using at least two additional arguments, and what to expect
+Ex.
+``` sh
+./pipe ls cat wc
+```
+should return the same output as 
+``` sh
+ls | cat | wc
+```
 
 ## Cleaning up
 
-Explain briefly how to clean up all binary files
+To remove all binary and executables 
+``` sh 
+make clean 
+```
