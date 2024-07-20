@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 			error = execlp(argv[index], argv[index], (char*)0);
 			if(error==-1){
 				perror("Execlp failed");
-				return ECHILD;
+				return EINVAL;
 			}
 			
 		}
@@ -44,9 +44,9 @@ int main(int argc, char *argv[])
 			int child_status;
 			waitpid(p,&child_status,0);
 			
-      if (WEXITSTATUS(child_status)) {
-        exit(WEXITSTATUS(child_status));
-      }
+      		if (WEXITSTATUS(child_status)) {
+        		retrun WEXITSTATUS(child_status);
+      		}
 			close(fd[1]);
 			error = dup2(fd[0],0);
 			if(error==-1){
